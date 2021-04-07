@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {PieModel} = require("../models")
+const {validateSession} = require("../middleware");
 
 router.get("/cherry", (req, res) => res.send("I love cherry pie!"))
 
@@ -18,7 +19,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", validateSession, async (req, res) => {
     const {
         nameOfPie,
         baseOfPie,
