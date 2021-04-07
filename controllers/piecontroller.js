@@ -97,4 +97,22 @@ router.get("/:nameOfPie", async (req, res) => {
     }
   });
 
+  router.delete("/:id", async (req, res) => {
+    try {
+      const deleted = await PieModel.destroy({
+        where: {
+          id: req.params.id
+        }
+      })
+      res.status(200).json({
+        message: "Pie successfully deleted",
+        deletedPies: deleted
+      })
+    } catch(err) {
+      res.status(500).json({
+        message: `Failed to delete pie: ${err}`
+      })
+    }
+  })
+
 module.exports = router
