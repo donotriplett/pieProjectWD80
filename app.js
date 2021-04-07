@@ -8,7 +8,9 @@ const dbConnection = require("./db");
 // app.get("/", (req, res) => res.render('index'));
 
 app.use(Express.json())
+app.use("/user", controllers.usercontroller)
 app.use("/pies", controllers.piecontroller);
+
 
 dbConnection.authenticate()
     .then(() => dbConnection.sync())
